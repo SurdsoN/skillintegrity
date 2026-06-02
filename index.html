@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill Integrity & Value Survey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-50: #E6F1FB; --blue-100: #B5D4F4; --blue-400: #378ADD; --blue-600: #185FA5; --blue-800: #0C447C; --blue-900: #042C53;
+    --green-50: #EAF3DE; --green-600: #3B6D11; --green-800: #27500A;
+    --amber-50: #FAEEDA; --amber-600: #854F0B; --amber-800: #633806;
+    --red-50: #FCEBEB; --red-600: #A32D2D; --red-800: #791F1F;
+    --gray-50: #F7F6F3; --gray-100: #EDECE8; --gray-200: #D3D1C7; --gray-400: #888780; --gray-600: #5F5E5A; --gray-800: #444441; --gray-900: #2C2C2A;
+    --bg: #FAFAF8;
+    --surface: #FFFFFF;
+    --border: rgba(0,0,0,0.08);
+    --border-strong: rgba(0,0,0,0.14);
+    --text-primary: #1A1917;
+    --text-secondary: #5F5E5A;
+    --text-muted: #888780;
+    --accent: #185FA5;
+    --accent-light: #E6F1FB;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111110;
+      --surface: #1C1C1A;
+      --border: rgba(255,255,255,0.08);
+      --border-strong: rgba(255,255,255,0.14);
+      --text-primary: #F0EFEA;
+      --text-secondary: #B4B2A9;
+      --text-muted: #888780;
+      --accent: #378ADD;
+      --accent-light: #0C2240;
+      --gray-50: #222220;
+      --gray-100: #2A2A28;
+      --gray-200: #3A3A38;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  .app-shell {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--accent);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-icon svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .header-badge {
+    font-size: 12px;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  main {
+    padding: 3rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 620px;
+  }
+
+  .step { display: none; }
+  .step.active { display: block; animation: fadeUp 0.35s ease; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 5vw, 40px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-body {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 480px;
+  }
+
+  .dimension-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 2.5rem;
+  }
+
+  .pill {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    background: var(--surface);
+  }
+
+  .input-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .input-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .text-input {
+    width: 100%;
+    height: 48px;
+    padding: 0 16px;
+    border: 1.5px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--text-primary);
+    background: var(--surface);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    outline: none;
+  }
+
+  .text-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(24,95,165,0.12);
+  }
+
+  .text-input::placeholder { color: var(--text-muted); }
+
+  .error-msg {
+    font-size: 12px;
+    color: var(--red-600);
+    margin-top: 5px;
+    display: none;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 20px;
+    border-radius: var(--radius-md);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text-primary);
+    transition: background 0.15s, transform 0.1s;
+    text-decoration: none;
+  }
+
+  .btn:hover { background: var(--gray-100); }
+  .btn:active { transform: scale(0.98); }
+
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .btn-primary:hover { background: var(--blue-800); border-color: var(--blue-800); }
+
+  .btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+  .progress-track {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .section-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .section-number {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+  }
+
+  .question-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .question-text {
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 1.55;
+    margin-bottom: 1rem;
+  }
+
+  .likert-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+  }
+
+  .likert-opt input { display: none; }
+
+  .likert-opt label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .likert-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: border-color 0.15s, background 0.15s, color 0.15s, transform 0.1s;
+  }
+
+  .likert-opt label:hover .likert-circle {
+    border-color: var(--accent);
+    background: var(--accent-light);
+    color: var(--accent);
+    transform: scale(1.06);
+  }
+
+  .likert-opt input:checked + label .likert-circle {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    transform: scale(1.08);
+  }
+
+  .likert-lbl {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+  }
+
+  .nav-info {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .results-hero {
+    text-align: center;
+    padding: 2rem 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+  }
+
+  .grade-ring {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px;
+    margin-bottom: 1rem;
+    border: 3px solid;
+  }
+
+  .grade-A { background: var(--green-50); border-color: var(--green-600); color: var(--green-800); }
+  .grade-B { background: var(--blue-50); border-color: var(--blue-600); color: var(--blue-800); }
+  .grade-C { background: var(--amber-50); border-color: var(--amber-600); color: var(--amber-800); }
+  .grade-D, .grade-F { background: var(--red-50); border-color: var(--red-600); color: var(--red-800); }
+
+  .results-score {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+  }
+
+  .results-skill-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+  }
+
+  .results-level {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+  }
+
+  .metric-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .metric-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .metric-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+
+  .section-breakdown {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .breakdown-header {
+    padding: 1rem 1.25rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .breakdown-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.875rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .breakdown-row:last-child { border-bottom: none; }
+
+  .breakdown-name {
+    font-size: 13px;
+    color: var(--text-primary);
+    flex: 1;
+    min-width: 0;
+  }
+
+  .breakdown-bar {
+    width: 100px;
+    height: 5px;
+    background: var(--gray-100);
+    border-radius: 3px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .breakdown-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--accent);
+    transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .breakdown-score {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    min-width: 30px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .interp-box {
+    border-radius: var(--radius-md);
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    border-left: 3px solid;
+    border-radius: 0;
+  }
+
+  .interp-A, .interp-B { background: var(--green-50); border-color: var(--green-600); }
+  .interp-C { background: var(--amber-50); border-color: var(--amber-600); }
+  .interp-D, .interp-F { background: var(--red-50); border-color: var(--red-600); }
+
+  .interp-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  .interp-A .interp-label, .interp-B .interp-label { color: var(--green-600); }
+  .interp-C .interp-label { color: var(--amber-600); }
+  .interp-D .interp-label, .interp-F .interp-label { color: var(--red-600); }
+
+  .interp-text {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .interp-A .interp-text, .interp-B .interp-text { color: var(--green-800); }
+  .interp-C .interp-text { color: var(--amber-800); }
+  .interp-D .interp-text, .interp-F .interp-text { color: var(--red-800); }
+
+  .grade-table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .grade-table-header {
+    padding: 1rem 1.25rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .grade-row {
+    display: grid;
+    grid-template-columns: 90px 80px 1fr;
+    gap: 10px;
+    align-items: center;
+    padding: 0.7rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .grade-row:last-child { border-bottom: none; }
+  .grade-row.highlight { background: var(--accent-light); }
+
+  .grade-chip {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .chip-A { background: var(--green-50); color: var(--green-800); }
+  .chip-B { background: var(--blue-50); color: var(--blue-800); }
+  .chip-C { background: var(--amber-50); color: var(--amber-800); }
+  .chip-D, .chip-F { background: var(--red-50); color: var(--red-800); }
+
+  .grade-row-score { color: var(--text-muted); font-size: 12px; }
+  .grade-row-interp { color: var(--text-secondary); line-height: 1.45; }
+
+  .action-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1rem 2rem;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 500px) {
+    header { padding: 0 1rem; }
+    main { padding: 2rem 1rem; }
+    .likert-circle { width: 32px; height: 32px; font-size: 13px; }
+    .likert-lbl { font-size: 9px; }
+    .grade-row { grid-template-columns: 70px 70px 1fr; font-size: 12px; }
+  }
+
+  @media print {
+    header, footer, .action-row { display: none !important; }
+    body { background: #fff; }
+    main { padding: 0; }
+    .container { max-width: 100%; }
+    .step { display: none !important; }
+    #step-results { display: block !important; }
+    .results-hero, .metric-grid, .section-breakdown, .interp-box, .grade-table { break-inside: avoid; }
+  }
+
+  #pdf-toast {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1A1917;
+    color: #F0EFEA;
+    font-size: 13px;
+    padding: 10px 20px;
+    border-radius: 100px;
+    z-index: 999;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+<div id="pdf-toast">Generating PDF…</div>
+<div class="app-shell">
+  <header>
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+      </div>
+      <span class="logo-text">SkillIntegrity</span>
+    </div>
+    <span class="header-badge">1–5 Likert Scale · 5 Dimensions</span>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- Step 0: Intro -->
+      <div class="step active" id="step-intro">
+        <p class="hero-eyebrow">Skill evaluation tool</p>
+        <h1>Does your skill <em>deserve</em> to be built on?</h1>
+        <p class="hero-body">Evaluate any professional or personal skill across five integrity dimensions. Answer 12 questions and receive an instant grade with a detailed justification report.</p>
+        <div class="dimension-pills">
+          <span class="pill">Ethical alignment</span>
+          <span class="pill">Trust & credibility</span>
+          <span class="pill">Personal growth</span>
+          <span class="pill">Contribution & impact</span>
+          <span class="pill">Accountability</span>
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="skill-name">Name the skill you want to evaluate</label>
+          <input class="text-input" type="text" id="skill-name" placeholder='e.g. "Machine Translation Post-Editing" or "Active Listening"' maxlength="80" autocomplete="off" />
+          <p class="error-msg" id="name-err">Please enter a skill name before continuing.</p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="startSurvey()">
+            Begin evaluation
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 1: Survey -->
+      <div class="step" id="step-survey">
+        <div class="progress-track"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+        <div id="section-wrap"></div>
+        <div class="nav-row">
+          <button class="btn" id="btn-back" onclick="prevSection()">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back
+          </button>
+          <span class="nav-info" id="nav-info"></span>
+          <button class="btn btn-primary" id="btn-next" onclick="nextSection()">
+            Next
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 2: Results -->
+      <div class="step" id="step-results"></div>
+
+    </div>
+  </main>
+
+  <footer>SkillIntegrity Survey &mdash; Likert-scale skill assessment tool</footer>
+</div>
+
+<script>
+const SECTIONS = [
+  {
+    id: 'ethical', title: 'Skill Relevance & Ethical Alignment',
+    questions: [
+      'I believe this skill significantly contributes to responsible decision-making.',
+      'Mastering this skill aligns closely with my personal and professional values.',
+      'This skill can be applied in ways that benefit others or society.'
+    ]
+  },
+  {
+    id: 'trust', title: 'Trust & Credibility',
+    questions: [
+      'Being proficient in this skill increases trust from colleagues or clients.',
+      'I can be transparent and accountable when using this skill.'
+    ]
+  },
+  {
+    id: 'growth', title: 'Personal Growth & Longevity',
+    questions: [
+      'Practicing this skill helps me develop positive character traits (e.g., patience, diligence, honesty).',
+      'This skill provides long-term value for my career or personal growth.',
+      'This skill can evolve with me over time while remaining relevant and useful.'
+    ]
+  },
+  {
+    id: 'impact', title: 'Contribution & Impact',
+    questions: [
+      'Applying this skill allows me to create meaningful outcomes for my team, organization, or community.',
+      'This skill enables me to solve problems in a principled and constructive way.'
+    ]
+  },
+  {
+    id: 'accountability', title: 'Self-Reflection & Accountability',
+    questions: [
+      'I can be evaluated or held accountable for how I use this skill.',
+      'I would feel confident mentoring or teaching this skill to others while maintaining integrity standards.'
+    ]
+  }
+];
+
+const LIKERT_LABELS = ['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree'];
+
+let current = 0;
+let responses = {};
+let skillName = '';
+
+function startSurvey() {
+  const v = document.getElementById('skill-name').value.trim();
+  if (!v) {
+    document.getElementById('name-err').style.display = 'block';
+    document.getElementById('skill-name').focus();
+    return;
+  }
+  skillName = v;
+  document.getElementById('name-err').style.display = 'none';
+  current = 0;
+  responses = {};
+  showStep('step-survey');
+  renderSection();
+}
+
+function showStep(id) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function getSectionKeys(sec) {
+  return sec.questions.map((_, i) => sec.id + '_' + i);
+}
+
+function renderSection() {
+  const sec = SECTIONS[current];
+  const pct = Math.round((current / SECTIONS.length) * 100);
+  document.getElementById('prog').style.width = pct + '%';
+  document.getElementById('nav-info').textContent = (current + 1) + ' of ' + SECTIONS.length;
+  document.getElementById('btn-back').style.visibility = current === 0 ? 'hidden' : 'visible';
+
+  const isLast = current === SECTIONS.length - 1;
+  const nextBtn = document.getElementById('btn-next');
+  nextBtn.innerHTML = isLast
+    ? 'See results <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>'
+    : 'Next <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+
+  let html = `<div class="section-header"><p class="section-number">Section ${current + 1} &mdash; ${SECTIONS.length}</p><h2 class="section-title">${sec.title}</h2></div>`;
+
+  sec.questions.forEach((q, qi) => {
+    const key = sec.id + '_' + qi;
+    html += `<div class="question-card"><p class="question-text">${q}</p><div class="likert-row" role="group" aria-label="${q}">`;
+    for (let v = 1; v <= 5; v++) {
+      const checked = responses[key] === v ? 'checked' : '';
+      const lbl = v === 1 ? 'Strongly<br>disagree' : v === 2 ? 'Disagree' : v === 3 ? 'Neutral' : v === 4 ? 'Agree' : 'Strongly<br>agree';
+      html += `<div class="likert-opt"><input type="radio" name="${key}" id="${key}_${v}" value="${v}" ${checked} onchange="record('${key}',${v})"><label for="${key}_${v}"><span class="likert-circle">${v}</span><span class="likert-lbl">${lbl}</span></label></div>`;
+    }
+    html += `</div></div>`;
+  });
+
+  document.getElementById('section-wrap').innerHTML = html;
+}
+
+function record(key, val) { responses[key] = val; }
+
+function nextSection() {
+  const keys = getSectionKeys(SECTIONS[current]);
+  if (keys.some(k => responses[k] === undefined)) {
+    alert('Please rate all questions before continuing.');
+    return;
+  }
+  if (current < SECTIONS.length - 1) {
+    current++;
+    renderSection();
+    document.querySelector('.progress-track').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    showResults();
+  }
+}
+
+function prevSection() {
+  if (current > 0) { current--; renderSection(); }
+}
+
+function avg(arr) { return arr.reduce((a, b) => a + b, 0) / arr.length; }
+
+function getGrade(score) {
+  if (score >= 4.5) return { grade: 'A', level: 'Excellent' };
+  if (score >= 3.5) return { grade: 'B', level: 'Good' };
+  if (score >= 2.5) return { grade: 'C', level: 'Moderate' };
+  if (score >= 1.5) return { grade: 'D', level: 'Low' };
+  return { grade: 'F', level: 'Poor' };
+}
+
+function getInterpText(grade) {
+  const n = `<strong>${skillName}</strong>`;
+  if (grade === 'A') return `${n} strongly supports integrity, trust, growth, and impact. It can reliably build personal and professional value and is highly recommended as a foundational skill.`;
+  if (grade === 'B') return `${n} contributes meaningfully to integrity and professional value. Consistent application adds real benefits — some deliberate refinement will help it reach its full potential.`;
+  if (grade === 'C') return `${n} shows moderate alignment with ethical behavior and value creation. It can serve as a supportive skill, but requires conscious effort, reinforcement, or mentoring to be reliably impactful.`;
+  if (grade === 'D') return `${n} contributes little to integrity or long-term value at this stage. It may be situational or underdeveloped — targeted improvement is recommended before treating it as a core skill.`;
+  return `${n} shows minimal or potentially negative impact on integrity and value. It is not recommended as a professional or personal growth foundation without significant development.`;
+}
+
+function showResults() {
+  const sectionAvgs = SECTIONS.map(sec => {
+    const vals = getSectionKeys(sec).map(k => responses[k]);
+    return { title: sec.title, avg: avg(vals) };
+  });
+  const overall = avg(Object.values(responses));
+  const { grade, level } = getGrade(overall);
+
+  const GRADE_DATA = [
+    { range: '4.5 – 5.0', grade: 'A', level: 'Excellent', interp: 'Strongly supports integrity, trust, growth, and impact.' },
+    { range: '3.5 – 4.49', grade: 'B', level: 'Good', interp: 'Contributes to integrity and value; consistent application adds benefits.' },
+    { range: '2.5 – 3.49', grade: 'C', level: 'Moderate', interp: 'Moderate effect; requires conscious effort to be impactful.' },
+    { range: '1.5 – 2.49', grade: 'D', level: 'Low', interp: 'Contributes little; may be situational or underdeveloped.' },
+    { range: '1.0 – 1.49', grade: 'F', level: 'Poor', interp: 'Minimal or negative impact; not recommended as a foundation.' },
+  ];
+
+  const breakdownRows = sectionAvgs.map(s => {
+    const pct = Math.round(((s.avg - 1) / 4) * 100);
+    return `<div class="breakdown-row">
+      <span class="breakdown-name">${s.title}</span>
+      <div class="breakdown-bar"><div class="breakdown-fill" style="width:${pct}%"></div></div>
+      <span class="breakdown-score">${s.avg.toFixed(2)}</span>
+    </div>`;
+  }).join('');
+
+  const gradeRows = GRADE_DATA.map(g => {
+    const hi = g.grade === grade ? ' highlight' : '';
+    return `<div class="grade-row${hi}">
+      <span class="grade-row-score">${g.range}</span>
+      <span class="grade-chip chip-${g.grade}">${g.grade} / ${g.level}</span>
+      <span class="grade-row-interp">${g.interp}</span>
+    </div>`;
+  }).join('');
+
+  document.getElementById('step-results').innerHTML = `
+    <div class="results-hero">
+      <div class="grade-ring grade-${grade}">${grade}</div>
+      <p class="results-score">${overall.toFixed(2)} / 5.00 &mdash; across ${Object.values(responses).length} questions</p>
+      <p class="results-skill-name">${skillName}</p>
+      <p class="results-level">${level}</p>
+    </div>
+
+    <div class="metric-grid">
+      <div class="metric-card">
+        <p class="metric-label">Overall score</p>
+        <p class="metric-value">${overall.toFixed(2)}</p>
+        <p class="metric-sub">out of 5.00</p>
+      </div>
+      <div class="metric-card">
+        <p class="metric-label">Grade</p>
+        <p class="metric-value">${grade}</p>
+        <p class="metric-sub">${level}</p>
+      </div>
+      <div class="metric-card">
+        <p class="metric-label">Questions</p>
+        <p class="metric-value">${Object.values(responses).length}</p>
+        <p class="metric-sub">across ${SECTIONS.length} dimensions</p>
+      </div>
+    </div>
+
+    <div class="section-breakdown">
+      <p class="breakdown-header">Section breakdown</p>
+      ${breakdownRows}
+    </div>
+
+    <div class="interp-box interp-${grade}">
+      <p class="interp-label">Assessment</p>
+      <p class="interp-text">${getInterpText(grade)}</p>
+    </div>
+
+    <div class="grade-table">
+      <p class="grade-table-header">Grading reference</p>
+      ${gradeRows}
+    </div>
+
+    <div class="action-row">
+      <button class="btn btn-primary" onclick="restart()">
+        <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M1 4v6h6M23 20v-6h-6M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg>
+        Evaluate another skill
+      </button>
+      <button class="btn" onclick="printReport()">
+        <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
+        Print / Save PDF
+      </button>
+    </div>
+  `;
+
+  showStep('step-results');
+}
+
+function restart() {
+  document.getElementById('skill-name').value = '';
+  showStep('step-intro');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('pdf-toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(() => { t.style.display = 'none'; }, 3000);
+}
+
+function printReport() {
+  const actionRow = document.querySelector('.action-row');
+  if (actionRow) actionRow.style.display = 'none';
+  showToast('Generating PDF…');
+
+  html2canvas(document.getElementById('step-results'), {
+    scale: 2,
+    useCORS: true,
+    backgroundColor: '#FAFAF8',
+    logging: false,
+    windowWidth: 680
+  }).then(canvas => {
+    const imgData = canvas.toDataURL('image/png');
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    const pageW = pdf.internal.pageSize.getWidth();
+    const pageH = pdf.internal.pageSize.getHeight();
+    const margin = 12;
+    const usableW = pageW - margin * 2;
+    const imgH = (canvas.height / canvas.width) * usableW;
+    let yPos = margin;
+    let remainH = imgH;
+    let srcY = 0;
+    const pxPerMm = canvas.width / usableW;
+
+    while (remainH > 0) {
+      const sliceH = Math.min(pageH - margin * 2, remainH);
+      const slicePx = sliceH * pxPerMm;
+      const sliceCanvas = document.createElement('canvas');
+      sliceCanvas.width = canvas.width;
+      sliceCanvas.height = slicePx;
+      const ctx = sliceCanvas.getContext('2d');
+      ctx.drawImage(canvas, 0, srcY, canvas.width, slicePx, 0, 0, canvas.width, slicePx);
+      pdf.addImage(sliceCanvas.toDataURL('image/png'), 'PNG', margin, yPos, usableW, sliceH);
+      remainH -= sliceH;
+      srcY += slicePx;
+      if (remainH > 0) { pdf.addPage(); yPos = margin; }
+    }
+
+    const safeSkill = skillName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+    pdf.save('skill_integrity_' + safeSkill + '.pdf');
+    if (actionRow) actionRow.style.display = '';
+    showToast('PDF saved!');
+  }).catch(() => {
+    if (actionRow) actionRow.style.display = '';
+    showToast('PDF failed — try File → Print in your browser instead.');
+  });
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>
